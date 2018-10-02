@@ -17,8 +17,8 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 
 
 // sbt の挙動の設定
-fork in (Test, run) := true
-connectInput := true
+//fork in (Test, run) := true
+//connectInput := true
 
 // ソースコードの在処を非標準の場所に設定
 scalaSource in Compile := baseDirectory.value / "src"
