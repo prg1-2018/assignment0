@@ -45,8 +45,55 @@ object FIB {
   }
 
   //An implementation of the Fibonacci function using polynomial products
+  type Polynomial = Array[BigInt]
   def fib_polynomial(n: Int): BigInt = {
-    0
+    def invertSignOdds(p: Polynomial): Polynomial = {
+      var res: Polynomial = Array.fill(p.size)(0)
+      for (i <- 0 to p.size-1) {
+        if (i % 2 == 1) res(i) = -p(i)
+        else res(i) = p(i)
+      }
+      res
+    }
+
+    def productOf(p: Polynomial, q: Polynomial): Polynomial = {
+      val degP = p.size-1
+      val degQ = q.size-1
+      var res: Polynomial = Array.fill(degP+degQ+1)(0)
+      for (i <- 0 to degP) {
+        for (j <- 0 to degQ) {
+          res(i+j) += p(i)*q(j)
+        }
+      }
+      res
+    }
+
+    def filterByIndex(p: Polynomial, condition: Int => Boolean): Polynomial = 
+      for {
+        (v, i) <- p.zipWithIndex
+        if condition(i)
+      } yield v
+
+    def ePrime(p: Polynomial, q: Polynomial): Polynomial = {
+      val pq: Polynomial = productOf(p, invertSignOdds(q))
+      filterByIndex(pq, i => i % 2 == 0)
+    }
+
+    def oPrime(p: Polynomial, q: Polynomial): Polynomial = {
+      val pq: Polynomial = productOf(p, invertSignOdds(q))
+      filterByIndex(pq, i => i % 2 == 1)
+    }
+
+    def prime(p: Polynomial): Polynomial = 
+      filterByIndex(productOf(p, invertSignOdds(p)), i => i%2==0)
+
+    def recursive(m: Int, p: Polynomial, q: Polynomial): BigInt = {
+      if (m == 0) p(0)
+      else if (m % 2 == 0) recursive(m/2, ePrime(p, q), prime(q))
+      else recursive((m-1)/2, oPrime(p, q), prime(q))
+    }
+
+    recursive(n, Array[BigInt](0, 1), Array[BigInt](1, -1, -1))
   }
 
   def bench(f: Int => BigInt, n: Int, name: String): Unit = {
