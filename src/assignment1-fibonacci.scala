@@ -28,7 +28,40 @@ object FIB {
 
   //An implementation of the Fibonacci function using matrix products
   def fib_matrix(n: Int): BigInt = {
-    0
+    def isEven(n : Int): Boolean = {
+      (n % 2) == 0
+    }
+    n match{
+      case 0 => 0
+      case 1 => 1
+      case _ =>{
+//        var ma = Array[BigInt](1, 1, 1, 0);
+        var mama: Array[BigInt] = null;
+        def mm(a: Array[BigInt], b: Array[BigInt]): Array[BigInt] = {
+          var c: Array[BigInt] = null;
+          c(0) = a(1)*b(1) + a(2)*b(3);
+          c(1) = a(1)*b(2) + a(2)*b(4);
+          c(2) = a(3)*b(1) + a(4)*b(3);
+          c(3) = a(3)*b(2) + a(4)*b(4);
+          c;
+        }
+        mama = mm(ma, ma);
+        isEven(n) match{
+          case true => {
+            for(i <- 1 to n/4){
+              mama = mm(mama, mama);
+            }
+          }
+          case false =>{
+            for(i <- 1 to (n-1)/4){
+              mama = mm(mama, mama);
+            }
+            mama = mm(ma, mama);
+          }
+        }
+        mama(3);
+      }
+    }
   }
 
   //An implementation of the Fibonacci function using polynomial products
