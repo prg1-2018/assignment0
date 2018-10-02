@@ -9,11 +9,35 @@ object FIB {
 
   //An implementation of the Fibonacci function using iteration (tail recursion)
   def fib_itr(n: Int): BigInt = {
-    0
+  	var m = n
+  	var a:BigInt = 1
+  	var b:BigInt = 0
+  	var c:BigInt = 0
+  	
+  	while(m >=1){
+  		c = a
+  		a = a+b
+  		b = c
+  		m = m - 1
+  	}
+  	b
   }
 
   //An implementation of the Fibonacci function using matrix products
   def fib_matrix(n: Int): BigInt = {
+  	
+  	val matrixA = Array(1.0, 1.0, 1.0, 0.0)
+  	
+  	def kakeru(A:Array[Int], B: Array[Int]):Array[Int] = {
+  	}
+  	 
+  	def pow(n:Int, A: Array[Int]):Array[Int] = {
+  		n match{
+  			case 0 => Array(1.0, 0.0, 1.0, 0.0)
+  			case_  => {
+  				if(n%2 = 1) pow() 
+  		}
+  	
     0
   }
 
