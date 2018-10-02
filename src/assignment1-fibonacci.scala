@@ -9,12 +9,15 @@ object FIB {
 
   //An implementation of the Fibonacci function using iteration (tail recursion)
   def fib_itr(n: Int): BigInt = {
-    0
+    def sub_itr(a: Int, b: Int, m: Int): BigInt = {
+        if(m==0){b}
+        else{sub_itr(a+b,a,m-1)}}
+    sub_itr(1,0,n)
   }
 
   //An implementation of the Fibonacci function using matrix products
   def fib_matrix(n: Int): BigInt = {
-    0
+    def pow()
   }
 
   //An implementation of the Fibonacci function using polynomial products
