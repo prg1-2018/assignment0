@@ -17,6 +17,11 @@ object FIB {
     0
   }
 
+  //An implementation of the Fibonacci function using polynomial products
+  def fib_polynomial(n: Int): BigInt = {
+    0
+  }
+
   def main(arg: Array[String]): Unit = {
     val n = 10
 
