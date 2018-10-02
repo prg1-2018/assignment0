@@ -22,29 +22,20 @@ object FIB {
     0
   }
 
+  def bench(f: Int => BigInt, n: Int, name: String): Unit = {
+    val start = System.nanoTime()
+    val r = f(n)
+    val end = System.nanoTime()
+    println(r)
+    println(name + ": " + (" " * (20 - name.length)) + (end-start) + "ns")
+  }
+
   def main(arg: Array[String]): Unit = {
     val n = 10
 
-    {
-      val start = System.nanoTime()
-      val r = fib_rec(n)
-      val end = System.nanoTime()
-      println(r)
-      println("fib_rec:    " + (end-start) + "ns")
-    }
-    {
-      val start = System.nanoTime()
-      val r = fib_itr(n)
-      val end = System.nanoTime()
-      println(r)
-      println("fib_itr:    " + (end-start) + "ns")
-    }
-    {
-      val start = System.nanoTime()
-      val r = fib_matrix(n)
-      val end = System.nanoTime()
-      println(r)
-      println("fib_matrix: " + (end-start) + "ns")
-    }
+    bench(fib_rec, n, "fib_rec")
+    bench(fib_itr, n, "fib_itr")
+    bench(fib_matrix, n, "fib_matrix")
+    bench(fib_polynomial, n, "fib_polynomial")
   }
 }
