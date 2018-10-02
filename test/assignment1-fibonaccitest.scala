@@ -23,6 +23,7 @@ class FIBTest extends FunSuite with Matchers {
      fib_polynomial(0) should equal (fib_matrix(0))
      fib_polynomial(1) should equal (fib_matrix(1))
      fib_polynomial(5) should equal (fib_matrix(5))
+     fib_polynomial(100) should equal (fib_matrix(100))
      fib_polynomial(100000) should equal (fib_matrix(100000))
    }
 

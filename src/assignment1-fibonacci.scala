@@ -30,8 +30,6 @@ object FIB {
           mat1.c*mat2.a+mat1.d*mat2.c,
           mat1.c*mat2.b+mat1.d*mat2.d
       )
-    val a: Matrix = Matrix(1,1,1,0)
-    val aPow2: Matrix = productOf(a,a)
 
     def pow(mat: Matrix, m: Int): Matrix = m match {
       case 0 => Matrix(1,0,0,1)
@@ -41,7 +39,7 @@ object FIB {
       }
     }
 
-    pow(a, n).c
+    pow(Matrix(1,1,1,0), n).c
   }
 
   //An implementation of the Fibonacci function using polynomial products
