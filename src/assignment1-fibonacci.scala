@@ -36,16 +36,16 @@ object FIB {
 
   //An implementation of the Fibonacci function using polynomial products
   def fib_polynomial(n: Int): BigInt = {
-    def poly_unko(m:Int,p:(BigInt,BigInt),q:(BigInt,BigInt,BigInt)):BigInt = p match{
+    def poly_power(m:Int,p:(BigInt,BigInt),q:(BigInt,BigInt,BigInt)):BigInt = p match{
     	case (p1,p0) => q match{
     		case (q2,q1,q0) => {
     			if(m==0) p0
-    			else if(m%2==0)poly_unko( m/2, (p0*q2-p1*q1,p0*q0), ( q2*q2,2*q2*q0-q1*q1,q0*q0 ) )
-    			else poly_unko( (m-1)/2, (p1*q2,p1*q0-p0*q1), ( q2*q2,2*q2*q0-q1*q1,q0*q0 ) )
+    			else if(m%2==0)poly_power( m/2, (p0*q2-p1*q1,p0*q0), ( q2*q2,2*q2*q0-q1*q1,q0*q0 ) )
+    			else poly_power( (m-1)/2, (p1*q2,p1*q0-p0*q1), ( q2*q2,2*q2*q0-q1*q1,q0*q0 ) )
     		}
     	}
   	}
-  	poly_unko(n,(1,0),(-1,-1,1))
+  	poly_power(n,(1,0),(-1,-1,1))
   }
 
   def bench(f: Int => BigInt, n: Int, name: String): Unit = {
