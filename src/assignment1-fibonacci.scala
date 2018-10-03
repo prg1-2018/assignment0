@@ -9,11 +9,25 @@ object FIB {
 
   //An implementation of the Fibonacci function using iteration (tail recursion)
   def fib_itr(n: Int): BigInt = {
-    0
+  	var m = n
+  	var a:BigInt = 1
+  	var b:BigInt = 0
+  	while (m>=1){
+  		var c:BigInt = a
+  		a = a+b
+  		b = c
+  		m = m-1
+  	}
+  	b
   }
 
   //An implementation of the Fibonacci function using matrix products
   def fib_matrix(n: Int): BigInt = {
+  	def pow(A:Array[BigInt],m:Int): Array[BigInt] = A match{
+  		case Array(a,b,c,d) =>
+  		if (m==0){Array(1,0,1,0)}else
+  		if (m%2==1){Array(1,0,1,0)}else {Array(1,0,1,0)}
+  	}
     0
   }
 
