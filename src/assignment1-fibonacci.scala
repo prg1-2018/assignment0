@@ -31,35 +31,43 @@ object FIB {
     def isEven(n : Int): Boolean = {
       (n % 2) == 0
     }
+    var m: Int = n;
     n match{
       case 0 => 0
-      case 1 => 1
-      case _ =>{
-//        var ma = Array[BigInt](1, 1, 1, 0);
-        var mama: Array[BigInt] = null;
+      case _ => {
+        var ma = new Array[BigInt](4);
         def mm(a: Array[BigInt], b: Array[BigInt]): Array[BigInt] = {
-          var c: Array[BigInt] = null;
-          c(0) = a(1)*b(1) + a(2)*b(3);
-          c(1) = a(1)*b(2) + a(2)*b(4);
-          c(2) = a(3)*b(1) + a(4)*b(3);
-          c(3) = a(3)*b(2) + a(4)*b(4);
+          var c = new Array[BigInt](4);
+          c(0) = a(0)*b(0) + a(1)*b(2);
+          c(1) = a(0)*b(1) + a(1)*b(3);
+          c(2) = a(2)*b(0) + a(3)*b(2);
+          c(3) = a(2)*b(1) + a(3)*b(3);
           c;
         }
-        mama = mm(ma, ma);
-        isEven(n) match{
-          case true => {
-            for(i <- 1 to n/4){
-              mama = mm(mama, mama);
-            }
+        def pow(a: Array[BigInt], m: Int): Array[BigInt] = {
+          if(m == 0) {
+            var c = new Array[BigInt](4);
+            c(0) = 1;
+            c(1) = 0;
+            c(2) = 0;
+            c(3) = 1;
+            c;
           }
-          case false =>{
-            for(i <- 1 to (n-1)/4){
-              mama = mm(mama, mama);
+          isEven(m) match{
+            case true =>{
+              pow(mm(a,a), m/2)
             }
-            mama = mm(ma, mama);
+            case false =>{
+              mm(a, pow(mm(a,a),(m-1)/2))
+            }
           }
         }
-        mama(3);
+        ma(0) = 1;
+        ma(1) = 1;
+        ma(2) = 1;
+        ma(3) = 0;
+        ma = pow(ma, n);
+        ma(2);
       }
     }
   }
