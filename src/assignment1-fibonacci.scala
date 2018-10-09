@@ -104,12 +104,10 @@ object FIB {
   }
 
   def main(arg: Array[String]): Unit = {
-    /*val n = 32
+    val n = 32
 
     bench(fib_rec, n, "fib_rec")
     bench(fib_itr, n, "fib_itr")
-    */
-    val n = 21474836
     bench(fib_matrix, n, "fib_matrix")
     bench(fib_polynomial, n, "fib_polynomial")
   }
