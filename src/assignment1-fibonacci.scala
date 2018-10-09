@@ -67,11 +67,11 @@ object FIB {
   }
 
   def main(arg: Array[String]): Unit = {
-    val n = (1 << 26)-1
+    val n = 10
 
-    //bench(fib_rec, n, "fib_rec")
-    //bench(fib_itr, n, "fib_itr")
-    //bench(fib_matrix, n, "fib_matrix")
+    bench(fib_rec, n, "fib_rec")
+    bench(fib_itr, n, "fib_itr")
+    bench(fib_matrix, n, "fib_matrix")
     bench(fib_polynomial, n, "fib_polynomial")
   }
 }
