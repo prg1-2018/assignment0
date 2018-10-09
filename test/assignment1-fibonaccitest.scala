@@ -16,14 +16,13 @@ class FIBTest extends FunSuite with Matchers {
     	}   
     }
     test("L_FIB tests") {
-    	for{i <- 5 to 20} {
+        var k = 9
+    	for{i <- 0 to 10} {
+    	    k = k*3
     		//println(i + "open!!")
-    		fib_matrix(1<<i) should equal (fib_itr(1<<i))
+    		fib_matrix(k) should equal (fib_itr(k))
+    		fib_matrix(k) should equal (fib_polynomial(k))
     	}
-    	for{i <- 5 to 25} {
-    		//println(i + "open!!")
-    		fib_matrix(1<<i) should equal (fib_polynomial(1<<i))
-    	}   
     }
 }
 
