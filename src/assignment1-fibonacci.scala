@@ -45,20 +45,24 @@ object FIB {
           c;
         }
         def pow(a: Array[BigInt], m: Int): Array[BigInt] = {
-          if(m == 0) {
-            var c = new Array[BigInt](4);
-            c(0) = 1;
-            c(1) = 0;
-            c(2) = 0;
-            c(3) = 1;
-            c;
-          }
-          isEven(m) match{
-            case true =>{
-              pow(mm(a,a), m/2)
+          m match {
+            case 0 =>{
+              var c = new Array[BigInt](4);
+              c(0) = 1;
+              c(1) = 0;
+              c(2) = 0;
+              c(3) = 1;
+              c;
             }
-            case false =>{
-              mm(a, pow(mm(a,a),(m-1)/2))
+            case _ =>{
+              isEven(m) match{
+                case true =>{
+                  pow(mm(a,a), m/2)
+                }
+                case false =>{
+                  mm(a, pow(mm(a,a),(m-1)/2))
+                }
+              }
             }
           }
         }
