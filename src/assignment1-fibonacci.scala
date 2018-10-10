@@ -13,7 +13,7 @@ object FIB {
   	var a:BigInt = 1
   	var b:BigInt = 0
   	while (m>=1){
-  		var c = a
+  		val c = a
   		a = a+b
   		b = c
   		m = m-1
