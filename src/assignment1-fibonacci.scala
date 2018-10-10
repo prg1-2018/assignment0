@@ -1,5 +1,20 @@
 package prg1.assignment1
 
+case class QuadMatrix(element: Array[Array[BigInt]]) {
+  def *(that: QuadMatrix): QuadMatrix = QuadMatrix({
+    val a = this.element
+    val b = that.element
+    Array(Array(a(0)(0)*b(0)(0) + a(0)(1)*b(1)(0), a(0)(0)*b(0)(1) + a(0)(1)*b(1)(1)),
+      Array(a(1)(0)*b(0)(0) + a(1)(1)*b(1)(0), a(1)(0)*b(1)(0) + a(1)(1)*b(1)(1)))
+  })
+
+  def pow(n: Int): QuadMatrix = {
+    if (n == 0) QuadMatrix(Array(Array(BigInt(1), BigInt(0)), Array(BigInt(0), BigInt(1))))
+    else if (n % 2 == 0) (this * this).pow(n / 2)
+    else this * (this * this).pow((n - 1) / 2)
+  }
+}
+
 object FIB {
   //An implementation of the Fibonacci function using the definition of the Fibonacci number
   def fib_rec(n: Int): BigInt = n match {
@@ -9,13 +24,21 @@ object FIB {
 
   //An implementation of the Fibonacci function using iteration (tail recursion)
   def fib_itr(n: Int): BigInt = {
-    0
+    var m = n
+    var a: BigInt = 1
+    var b: BigInt = 0
+    var c: BigInt = 0
+    while (m >= 1) {
+      c = a
+      a += b
+      b = c
+      m = m - 1
+    }
+    b
   }
 
   //An implementation of the Fibonacci function using matrix products
-  def fib_matrix(n: Int): BigInt = {
-    0
-  }
+  def fib_matrix(n: Int): BigInt = QuadMatrix(Array(Array(BigInt(1), BigInt(1)), Array(BigInt(1), BigInt(0)))).pow(n).element(1)(0)
 
   //An implementation of the Fibonacci function using polynomial products
   def fib_polynomial(n: Int): BigInt = {
