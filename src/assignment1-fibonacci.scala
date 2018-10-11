@@ -80,6 +80,16 @@ object FIB {
   def fib_polynomial(n: Int): BigInt = {
     def porec(m: Int, p: Array[BigInt], dp: Int, q: Array[BigInt], dq: Int): BigInt = {
       //m次の係数を返す p:P(x), q:Q(x), dp:整式Pの係数を格納する配列の末尾のラベル dq:整式Qの係数を格納する配列の末尾のラベル
+      printf("i = %d, ", m);
+      printf("P(x) = ");
+      for(i <- 0 to dp){
+        printf("%+d ", p(i))
+      }
+      printf(",Q(x) = ");
+      for(i <- 0 to dq){
+        printf("%+d ", q(i))
+      }
+      //printf("\n");
       m match{
         case 0 => p(0)
         case _ =>{
@@ -94,6 +104,7 @@ object FIB {
             }
             for(i <- 0 to da){
               for(j <- 0 to db){
+                printf("c(%d)  = %d += %d * %d = %d\n", i+j, c(i+j), a(i), b(j), a(i) * b(j));
                 c(i+j) = c(i+j) + a(i) * b(j)
               }
             }
@@ -128,34 +139,41 @@ object FIB {
           }
           def revQ(qx: Array[BigInt], dqx: Int): Array[BigInt] = {
             //Q(x)の係数からQ(-x)の係数を計算する
+            var t = new Array[BigInt](dqx+1);
+            for(i <- 0 to dqx){
+              t(i) = qx(i);
+            }
             isEven(dqx) match{
               case true => {
                 for(i <- 0 to dqx/2-1){
-                  qx(2*i + 1) = -1*qx(2*i + 1);
+                  t(2*i + 1) = -1*qx(2*i + 1);
                 }
-                qx
+                t
               }
               case false => {
                 for(i <- 0 to dqx/2){
-                  qx(2*i + 1) = -1*qx(2*i + 1);
+                  t(2*i + 1) = -1*qx(2*i + 1);
                 }
-                qx
+                t
               }
             }
           }
+          printf(",Q(-x) = ");
+          for(i <- 0 to dq){
+            printf("%+d ", revQ(q, dq)(i))
+          }
+          printf("\n");
+          printf("Q(x) x Q(-x)\n= ");
+          for(i <- 0 to dq+dq){
+            //printf("%+d ", pocon(q, dq, revQ(q, dq), dq)(i));
+          }
+          printf("\n");
           isEven(m) match {
             case true =>{
               porec(m/2, poev(pocon(p, dp, revQ(q, dq), dq), dp+dq), (dp+dq)/2, poev(pocon(q, dq, revQ(q, dq),  dq), dq+dq), dq);
             }
             case false =>{
-              isEven(dp + dq) match{
-                case true =>{
-                  porec((m-1)/2, podd(pocon(p, dp, revQ(q, dq), dq), dp+dq), (dp+dq)/2-1, poev(pocon(q, dq, revQ(q, dq),  dq), dq+dq), dq);
-                }
-                case false =>{
-                  porec((m-1)/2, podd(pocon(p, dp, revQ(q, dq), dq), dp+dq), (dp+dq)/2, poev(pocon(q, dq, revQ(q, dq),  dq), dq+dq), dq);
-                }
-              }
+              porec((m-1)/2, podd(pocon(p, dp, revQ(q, dq), dq), dp+dq), (dp+dq)/2, poev(pocon(q, dq, revQ(q, dq),  dq), dq+dq), dq);
             }
           }
         }
