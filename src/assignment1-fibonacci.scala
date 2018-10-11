@@ -25,7 +25,7 @@ object FIB {
       b += tmp
       i -= 1
     }*/
-    return b
+    b
   }
 
 
@@ -45,12 +45,12 @@ object FIB {
     def mult_sp(A : Array[BigInt], B : Array[BigInt]): Array[BigInt] ={ // N. B. expecting A = f^p, B = f^q, but f = [[1, 1], [1, 0]]
       val tmp1 = A(0) * B(0) + A(1) * B(2)
       val tmp2 = A(0) * B(1) + A(1) * B(3)
-      return Array(tmp1, tmp2, tmp2, tmp1 - tmp2)
+      Array(tmp1, tmp2, tmp2, tmp1 - tmp2)
     }
 
     def pow_sp(A : Array[BigInt], m : Int): Array[BigInt] = {
       if(m == 0){ // m is 0
-        return Array(1, 0, 0, 1)
+        Array(1, 0, 0, 1)
       }
       else{
         if(m % 2 == 0){ // m is even
@@ -63,7 +63,7 @@ object FIB {
     }
 
     val A = pow_sp(Array(1, 1, 1, 0), n)
-    return A(1)
+    A(1)
   }
 
 
@@ -76,23 +76,23 @@ object FIB {
       * Q(x) = 1 + cx + dx^2 : quadratic
       */
       if(k == 0){
-        return a
+        a
       }
       else{
         val C : BigInt = (2 * d) - (c * c)
         val D : BigInt = d * d
         if(k % 2 == 0){
           val B : BigInt = (a * d) - (b * c)
-          return reduct(a, B, C, D, k / 2)
+          reduct(a, B, C, D, k / 2)
         }
         else{
           val A : BigInt = b - (a * c)
           val B : BigInt = b * d
-          return reduct(A, B, C, D, k / 2)
+          reduct(A, B, C, D, k / 2)
         }
       }
     }
-    return reduct(0, 1, -1, -1, n)
+    reduct(0, 1, -1, -1, n)
   }
 
   def bench(f: Int => BigInt, n: Int, name: String): Unit = {
