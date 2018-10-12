@@ -9,12 +9,34 @@ object FIB {
 
   //An implementation of the Fibonacci function using iteration (tail recursion)
   def fib_itr(n: Int): BigInt = {
-    0
+    var m : BigInt = n
+    var a : BigInt = 1
+    var b : BigInt = 0
+    while (m >= 1){
+        val c : BigInt = a
+        a = a + b
+        b = c
+        m = m - 1
+    }
+    return (b)
   }
 
   //An implementation of the Fibonacci function using matrix products
   def fib_matrix(n: Int): BigInt = {
-    0
+    def pow(a1:BigInt, a2:BigInt, b1:BigInt, b2:BigInt, n:Int):(BigInt, BigInt, BigInt, BigInt, Int) = 
+        (a1, a2, b1, b2, n) match{
+            case (a1, a2, b1, b2, 0) => (1, 0, 0, 1, 0)
+            case (a1, a2, b1, b2, m) => if (m%2 == 1){
+                pow(a1*a1+a2*b1, a1*a2+a2*b2, b1*a1+b2*b1, b1*a2+b2*b2, (m-1)/2) match{
+                    case (aa1, aa2, bb1, bb2, l) => (aa1*a1+aa2*b1, aa1*a2+aa2*b2, bb1*a1+bb2*b1, bb1*a2+bb2*b2, (m-1)/2)
+            }}
+            else {
+                pow(a1*a1+a2*b1, a1*a2+a2*b2, b1*a1+b2*b1, b1*a2+b2*b2, m/2)
+            }
+    }
+    pow(1, 1, 1, 0, n) match{
+        case (a, b, c, d, m) => c
+    }
   }
 
   //An implementation of the Fibonacci function using polynomial products
