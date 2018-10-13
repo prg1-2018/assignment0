@@ -27,7 +27,7 @@ class FIBTestItrToMat extends FunSuite with Matchers {
      }
      var m=100
      while (m>=0){
-     fib_matrix(100) should equal (fib_itr(100))
+     fib_matrix(m) should equal (fib_itr(m))
      m=m-1
      }
    }
