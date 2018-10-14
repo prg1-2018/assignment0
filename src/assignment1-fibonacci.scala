@@ -42,19 +42,6 @@ object FIB {
 
   //An implementation of the Fibonacci function using polynomial products
   def fib_polynomial(n: Int): BigInt = {
-    def multi(x: Array[BigInt], y:Array[BigInt]): Array[BigInt] = {
-      val res = new Array[BigInt](x.length + y.length - 1)
-      for (i <- res.indices) res(i) = 0
-      for (i <- x.indices) for (j <- y.indices) res(i + j) += x(i) * y(j)
-      res
-    }
-
-    def zip(x: Array[BigInt], isEven: Boolean): Array[BigInt] = {
-      val res = new Array[BigInt]((x.length + 1) / 2)
-      for (i <- res.indices) res(i) = x(2 * i + (if(isEven) 0 else 1))
-      res
-    }
-
     def multiZip(x: Array[BigInt], y:Array[BigInt], isEven: Boolean): Array[BigInt] = {
       val res = new Array[BigInt]((x.length + y.length) / 2)
       for (i <- res.indices) res(i) = 0
