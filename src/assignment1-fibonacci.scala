@@ -62,9 +62,10 @@ object FIB {
     }
 
     def solve(p: Array[BigInt], q:Array[BigInt], m: Int): BigInt = {
+      val rq = reverse(q)
       if (m == 0) p(0)
-      else if (m % 2 == 0) solve(zip(multi(p, reverse(q)),true), zip(multi(q, reverse(q)), true), m / 2)
-      else solve(zip(multi(p, reverse(q)),false), zip(multi(q, reverse(q)), true), (m - 1) / 2)
+      else if (m % 2 == 0) solve(zip(multi(p, rq),true), zip(multi(q, rq), true), m / 2)
+      else solve(zip(multi(p, rq),false), zip(multi(q, rq), true), (m - 1) / 2)
     }
 
     solve(Array(BigInt(0), BigInt(1)), Array(BigInt(1), BigInt(-1), BigInt(-1)), n)
