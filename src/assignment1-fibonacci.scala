@@ -35,23 +35,24 @@ object FIB {
   )
 }
 
-  val H = Gyouretu(1, 0, 0, 1)
+  val H = Gyouretu(1, 1, 1, 0)
   
   def pow(A:Gyouretu, n:Int):Gyouretu = {
   		n match{
-  			case 0 => H
+  			case 0 => Gyouretu(1, 0, 0, 1)
   			case _  => {
   				if(n%2 == 1) GyouretuSeki(A, pow(GyouretuSeki(A, A), (n-1)/2))
   				else pow(GyouretuSeki(A, A), n/2) 
   		}
   		}
   }
-    
+      
   def fib_matrix(n: Int): BigInt = {
+  	val K:Gyouretu = pow(H, n)
   	n match{
   	  case 0 => 0
   	  case 1 => 1
-  	  case _ => pow(H, n).a3
+  	  case _ => K.a3
   	  }	
   	}
   	
