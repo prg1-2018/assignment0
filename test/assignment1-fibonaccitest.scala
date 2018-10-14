@@ -28,5 +28,4 @@ class FIBTest extends FunSuite with Matchers {
 
      fib_polynomial(100000) should equal (fib_matrix(100000))
    }
-
 }

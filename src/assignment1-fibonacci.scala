@@ -46,8 +46,8 @@ object FIB {
       */
       if(m==0) return a
       else{
-        val C: BigInt = 2*d - c*c
-        val D: BigInt = d*d
+        val C:BigInt = 2*d - c*c
+        val D:BigInt = d*d
         if(m%2==0){
           fib_GnrtFunc(a, a*d-b*c, C, D, m/2)
         }
