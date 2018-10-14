@@ -19,7 +19,7 @@ object FIB {
       a = a + temp
       m = m-1
     }
-    return b
+    b
   }
 
   //An implementation of the Fibonacci function using matrix products
@@ -40,7 +40,7 @@ case class Matrix(a: BigInt,b: BigInt,c: BigInt,d: BigInt)
     }
 
     val Matrix(a,b,c,d) = pow(Matrix(1,1,1,0),n)
-    return c
+    c
   }
 
   //An implementation of the Fibonacci function using polynomial products
