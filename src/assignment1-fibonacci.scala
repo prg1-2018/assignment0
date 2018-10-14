@@ -24,23 +24,37 @@ object FIB {
   }
 
   //An implementation of the Fibonacci function using matrix products
-  def fib_matrix(n: Int): BigInt = {
-  	
-  	val matrixA = Array(1.0, 1.0, 1.0, 0.0)
-  	
-  	def kakeru(A:Array[Int], B: Array[Int]):Array[Int] = {
-  	}
-  	 
-  	def pow(n:Int, A: Array[Int]):Array[Int] = {
-  		n match{
-  			case 0 => Array(1.0, 0.0, 1.0, 0.0)
-  			case_  => {
-  				if(n%2 = 1) pow() 
-  		}
-  	
-    0
-  }
+  
+  case class Gyouretu(a1:BigInt, a2:BigInt, a3:BigInt, a4:BigInt)
+  
+  def GyouretuSeki(A:Gyouretu, B:Gyouretu):Gyouretu = {Gyouretu(
+  A.a1 * B.a1 + A.a2 * B.a3,
+  A.a1 * B.a2 + A.a2 * B.a4,
+  A.a3 * B.a1 + A.a4 * B.a3,
+  A.a3 * B.a2 + A.a4 * B.a4
+  )
+}
 
+  val H = Gyouretu(1, 0, 0, 1)
+  
+  def pow(A:Gyouretu, n:Int):Gyouretu = {
+  		n match{
+  			case 0 => H
+  			case _  => {
+  				if(n%2 == 1) GyouretuSeki(A, pow(GyouretuSeki(A, A), (n-1)/2))
+  				else pow(GyouretuSeki(A, A), n/2) 
+  		}
+  		}
+  }
+    
+  def fib_matrix(n: Int): BigInt = {
+  	n match{
+  	  case 0 => 0
+  	  case 1 => 1
+  	  case _ => pow(H, n).a3
+  	  }	
+  	}
+  	
   //An implementation of the Fibonacci function using polynomial products
   def fib_polynomial(n: Int): BigInt = {
     0
@@ -53,6 +67,8 @@ object FIB {
     println(r)
     println(name + ": " + (" " * (20 - name.length)) + (end-start) + "ns")
   }
+  
+  
 
   def main(arg: Array[String]): Unit = {
     val n = 10
