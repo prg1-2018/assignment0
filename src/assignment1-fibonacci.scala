@@ -5,7 +5,7 @@ object FIB {
   def fib_rec(n: Int): BigInt = n match {
     case 0 | 1 => n
     case _ => fib_rec(n-1) + fib_rec(n-2)
-  }
+  } 
 
   //An implementation of the Fibonacci function using iteration (tail recursion)
   def fib_itr(n: Int): BigInt = {
