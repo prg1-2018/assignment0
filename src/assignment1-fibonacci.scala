@@ -55,17 +55,24 @@ object FIB {
       res
     }
 
+    def multiZip(x: Array[BigInt], y:Array[BigInt], isEven: Boolean): Array[BigInt] = {
+      val res = new Array[BigInt]((x.length + y.length) / 2)
+      for (i <- res.indices) res(i) = 0
+      for (i <- x.indices) for (j <- y.indices) if (((i + j) % 2 == 0) == isEven) res((i + j) / 2) += x(i) * y(j)
+      res
+    }
+
     def reverse(x: Array[BigInt]): Array[BigInt] = {
       val res = new Array[BigInt](x.length)
       for (i <- x.indices) res(i) = if (i % 2 == 0) x(i) else -x(i)
       res
     }
-
+    
     def solve(p: Array[BigInt], q:Array[BigInt], m: Int): BigInt = {
       val rq = reverse(q)
       if (m == 0) p(0)
-      else if (m % 2 == 0) solve(zip(multi(p, rq),true), zip(multi(q, rq), true), m / 2)
-      else solve(zip(multi(p, rq),false), zip(multi(q, rq), true), (m - 1) / 2)
+      else if (m % 2 == 0) solve(multiZip(p, rq, true), multiZip(q, rq, true), m / 2)
+      else solve(multiZip(p, rq, false), multiZip(q, rq, true), (m - 1) / 2)
     }
 
     solve(Array(BigInt(0), BigInt(1)), Array(BigInt(1), BigInt(-1), BigInt(-1)), n)
