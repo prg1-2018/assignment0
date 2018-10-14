@@ -42,7 +42,32 @@ object FIB {
 
   //An implementation of the Fibonacci function using polynomial products
   def fib_polynomial(n: Int): BigInt = {
-    0
+    def multi(x: Array[BigInt], y:Array[BigInt]): Array[BigInt] = {
+      val res = new Array[BigInt](x.length + y.length - 1)
+      for (i <- res.indices) res(i) = 0
+      for (i <- x.indices) for (j <- y.indices) res(i + j) += x(i) * y(j)
+      res
+    }
+
+    def zip(x: Array[BigInt], isEven: Boolean): Array[BigInt] = {
+      val res = new Array[BigInt]((x.length + 1) / 2)
+      for (i <- res.indices) res(i) = x(2 * i + (if(isEven) 0 else 1))
+      res
+    }
+
+    def reverse(x: Array[BigInt]): Array[BigInt] = {
+      val res = new Array[BigInt](x.length)
+      for (i <- x.indices) res(i) = if (i % 2 == 0) x(i) else -x(i)
+      res
+    }
+
+    def solve(p: Array[BigInt], q:Array[BigInt], m: Int): BigInt = {
+      if (m == 0) p(0)
+      else if (m % 2 == 0) solve(zip(multi(p, reverse(q)),true), zip(multi(q, reverse(q)), true), m / 2)
+      else solve(zip(multi(p, reverse(q)),false), zip(multi(q, reverse(q)), true), (m - 1) / 2)
+    }
+
+    solve(Array(BigInt(0), BigInt(1)), Array(BigInt(1), BigInt(-1), BigInt(-1)), n)
   }
 
   def bench(f: Int => BigInt, n: Int, name: String): Unit = {
@@ -54,9 +79,9 @@ object FIB {
   }
 
   def main(arg: Array[String]): Unit = {
-    val n = 10
+    val n = 100
 
-    bench(fib_rec, n, "fib_rec")
+    //bench(fib_rec, n, "fib_rec")
     bench(fib_itr, n, "fib_itr")
     bench(fib_matrix, n, "fib_matrix")
     bench(fib_polynomial, n, "fib_polynomial")
