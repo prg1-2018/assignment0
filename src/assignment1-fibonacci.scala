@@ -27,13 +27,13 @@ object FIB {
     def mlt(x: Matrix, y: Matrix): Matrix = {
         val Matrix(a,b,c,d) = x
         val Matrix(p,q,r,s) = y
-        Matrix(a*p+b*r,a*q+b*s,c*p+d*r,c*q+d*s)
+        Matrix(a*p+b*r, a*q+b*s, c*p+d*r, c*q+d*s)
     }
 
   	def pow(A: Matrix, m: Int): Matrix = {
         if(m == 0)Matrix(1,0,0,1)
-        else if(m % 2 == 0) pow(mlt(A,A), n/2)
-        else{mlt(A, pow(mlt(A,A), (n-1)/2))}
+        else if(m % 2 == 0) pow(mlt(A,A), m/2)
+        else{mlt(A, pow(mlt(A,A), (m-1)/2))}
         
     }
    pow(Matrix(1,1,1,0),n).a21
