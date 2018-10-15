@@ -4,19 +4,27 @@ import org.scalatest._
 import FIB._
 
 class FIBTest extends FunSuite with Matchers {
-   test("FIB tests") {
-     fib_itr(0) should equal (fib_rec(0))
-     fib_matrix(0) should equal (fib_rec(0))
-     fib_polynomial(0) should equal (fib_rec(0))
+   test("FIB test1") {
 
-     fib_itr(2) should equal (fib_rec(2))
-     fib_matrix(2) should equal (fib_rec(2))
-     fib_polynomial(2) should equal (fib_rec(2))
+     for {m <- 0 to 20}{
+     fib_itr(m) should equal (fib_rec(m))
+     fib_matrix(m) should equal (fib_rec(m))
+     fib_polynomial(m) should equal (fib_rec(m))
+   }
 
-     fib_matrix(100) should equal (fib_itr(100))
-     fib_polynomial(100) should equal (fib_itr(100))
+   }
 
-     fib_polynomial(1000) should equal (fib_matrix(1000))
+   test("FIB test2"){
+     for {m <- 21 to 100}{
+     fib_matrix(m) should equal (fib_itr(m))
+     fib_polynomial(m) should equal (fib_itr(m))
+   }
+   }
+
+   test("FIB test3"){
+     for {m <- 101 to 10000}{
+     fib_polynomial(m) should equal (fib_matrix(m))
+   }
    }
 
 }

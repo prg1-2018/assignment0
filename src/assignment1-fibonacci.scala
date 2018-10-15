@@ -9,7 +9,6 @@ object FIB {
 
   //An implementation of the Fibonacci function using iteration (tail recursion)
   def fib_itr(n: Int): BigInt = {
-     var m = 1
      var a:BigInt = 1
      var b:BigInt = 0
     for {m <- 1 to n}{
