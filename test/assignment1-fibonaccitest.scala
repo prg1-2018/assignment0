@@ -14,6 +14,7 @@ class FIBTest extends FunSuite with Matchers {
      fib_itr(2) should equal (fib_rec(2))
      fib_itr(5) should equal (fib_rec(5))
      fib_itr(10) should equal (fib_rec(10))
+     fib_itr(13) should equal (fib_rec(13))
      fib_itr(20) should equal (fib_rec(20))
      fib_itr(23) should equal (fib_rec(23))
      fib_itr(30) should equal (fib_rec(30))
@@ -22,6 +23,7 @@ class FIBTest extends FunSuite with Matchers {
      fib_itr(50) should equal (fib_matrix(50))
      fib_itr(61) should equal (fib_matrix(61))
      fib_itr(75) should equal (fib_matrix(75))
+<<<<<<< HEAD
      fib_itr(88) should equal (fib_matrix(88))
      fib_itr(100) should equal (fib_matrix(100))
      fib_itr(133) should equal (fib_matrix(133))
@@ -30,6 +32,15 @@ class FIBTest extends FunSuite with Matchers {
      fib_itr(200) should equal (fib_matrix(200))
      fib_itr(295) should equal (fib_matrix(295))
      fib_itr(346) should equal (fib_matrix(346))
+=======
+     fib_itr(89) should equal (fib_matrix(89))
+     fib_itr(100) should equal (fib_matrix(100))
+     fib_itr(133) should equal (fib_matrix(133))
+     fib_itr(177) should equal (fib_matrix(177))
+     fib_itr(200) should equal (fib_matrix(200))
+     fib_itr(295) should equal (fib_matrix(295))
+     fib_itr(347) should equal (fib_matrix(347))
+>>>>>>> b7e7726689fa5dfa3b7667df0814154b58608f15
      fib_itr(500) should equal (fib_matrix(500))
      fib_itr(1000) should equal (fib_matrix(1000))
      fib_itr(10000) should equal (fib_matrix(10000))
