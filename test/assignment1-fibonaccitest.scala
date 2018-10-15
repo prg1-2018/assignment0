@@ -16,6 +16,7 @@ class FIBTest extends FunSuite with Matchers {
      fib_matrix(1000) should equal (fib_itr(1000))
      fib_matrix(10000) should equal (fib_itr(10000))
    }
+   
 }
 
 
