@@ -9,13 +9,31 @@ object FIB {
 
   //An implementation of the Fibonacci function using iteration (tail recursion)
   def fib_itr(n: Int): BigInt = {
-    0
+    var m = n
+    var a: BigInt = 1
+    var b: BigInt = 0
+    while(m >= 1) {
+    	val c = a
+    	a = a + b
+    	b = c
+    	m = m - 1
+    }
   }
 
   //An implementation of the Fibonacci function using matrix products
   def fib_matrix(n: Int): BigInt = {
-    0
-  }
+  	def mulMatrix(List[BigInt],List[BigInt]): List[BigInt] = (X,Y) match{
+  		case ((a,b,c,d),(e,f,g,h)) => (ae+bg, af+bh, ce+dg, cf+dh)
+  	}
+  	val A = List(1,1,1,0)
+  	def pow(List[BigInt],n): List[BigInt] = n match{
+  		case 0 => A
+  		case n%2 = 0 => mulMatrix(A, pow(mulMatrix(A,A), (n-1)/2))
+  		case n%2 = 1 => pow(mulMatrix(A,A), n/2)
+  	}
+  	val A_n = pow(A,n)
+  	A_n[2]
+  	 }
 
   //An implementation of the Fibonacci function using polynomial products
   def fib_polynomial(n: Int): BigInt = {
