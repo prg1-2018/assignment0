@@ -9,7 +9,7 @@ object FIB {
 
   //An implementation of the Fibonacci function using iteration (tail recursion)
   def fib_itr(n: Int): BigInt = {
-    def fib_itr_sub(a:Int, b:Int,m:Int): BigInt = (a,b,m) match {
+    def fib_itr_sub(a:BigInt, b:BigInt, m:Int): BigInt = (a,b,m) match {
         case (_,_,0) => b
         case (_,_,_) => fib_itr_sub(a+b,a,m-1)
     }
