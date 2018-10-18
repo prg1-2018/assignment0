@@ -45,16 +45,16 @@ object FIB {
 	}
 	}
 
- def get :
+ /*def get :
 		(Matrix) => BigInt
 		=
 		(A)=>
 		A match {case Matrix(a,b,c,d)=>{c}} 
-		
+*/		
 
   def	fib_matrix(n:Int):BigInt = n match{
  	case 0 => 0
- 	case _ => get(pow(Matrix(1,1,1,0),n)) 
+ 	case _ => pow(Matrix(1,1,1,0),n).a21 
  }
 
   //An implementation of the Fibonacci function using polynomial products
