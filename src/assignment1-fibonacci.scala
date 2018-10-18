@@ -28,9 +28,6 @@ object FIB {
 
   //An implementation of the Fibonacci function using matrix products
   def fib_matrix(n: Int): BigInt = {
-    def isEven(n : Int): Boolean = {
-      (n % 2) == 0
-    }
     var m: Int = n;
     n match{
       case 0 => 0
@@ -55,7 +52,7 @@ object FIB {
               c;
             }
             case _ =>{
-              isEven(m) match{
+              (m%2)match{
                 case true =>{
                   pow(mm(a,a), m/2)
                 }
@@ -83,9 +80,6 @@ object FIB {
       m match{
         case 0 => p(0)
         case _ =>{
-          def isEven(n : Int): Boolean = {
-            (n % 2) == 0
-          }
           def pocon(a: Array[BigInt], da: Int, b: Array[BigInt], db: Int): Array[BigInt] = {
             //整式の積
             var c = new Array[BigInt](da+db+1);
@@ -109,7 +103,7 @@ object FIB {
           }
           def podd(r: Array[BigInt], dr: Int): Array[BigInt] = {
             //整式のうち、奇数次数の係数のみ取り出す
-            isEven(dr) match{
+            (dr%2) match{
               case true => {
                 var o = new Array[BigInt](dr/2)
                 for(i <- 0 to dr/2-1){
@@ -132,7 +126,7 @@ object FIB {
             for(i <- 0 to dqx){
               t(i) = qx(i);
             }
-            isEven(dqx) match{
+            (dqx%2) match{
               case true => {
                 for(i <- 0 to dqx/2-1){
                   t(2*i + 1) = -1*qx(2*i + 1);
@@ -147,7 +141,7 @@ object FIB {
               }
             }
           }
-          isEven(m) match {
+          (m%2) match {
             case true =>{
               porec(m/2, poev(pocon(p, dp, revQ(q, dq), dq), dp+dq), (dp+dq)/2, poev(pocon(q, dq, revQ(q, dq),  dq), dq+dq), dq);
             }
