@@ -9,34 +9,29 @@ case _ => fib_rec(n-1) + fib_rec(n-2)
 
 //An implementation of the Fibonacci function using iteration (tail recursion)
 def fib_itr(n: Int): BigInt = {
-var m = n
-var a: BigInt = 1
-var b: BigInt = 0
-while(m >= 1) {
-val c = a
-a = a + b
-b = c
-m = m - 1
-}
-a
+    def aux(n: Int, a: BigInt, b: BigInt): BigInt = n match {
+        case 0 => b
+        case _ => aux(n-1, a+b, a)
+    }
+    aux(n, 1, 0)
 }
 
 //An implementation of the Fibonacci function using matrix products
 def fib_matrix(n: Int): BigInt = {
-def mulMatrix(x:List[BigInt],y:List[BigInt]): List[BigInt] = (x,y) match{
-case (List(a,b,c,d),List(e,f,g,h)) => List(a*e+b*g, a*f+b*h, c*e+d*g, c*f+d*h)
-}
-val A: List[BigInt] = List(1,1,1,0)
-val I: List[BigInt] = List(1,0,1,0)
-def pow(x:List[BigInt],n:Int): List[BigInt] = n match{
-case 0 => I
-case _ => n%2 match{
-case 0 => mulMatrix(A, pow(mulMatrix(A,A), (n-1)/2))
-case 1 => pow(mulMatrix(A,A), n/2)
-}
-}
-val A_n = pow(A,n)
-A_n(1)
+    def mulMatrix(x:List[BigInt],y:List[BigInt]): List[BigInt] = (x,y) match{
+        case (List(a,b,c,d),List(e,f,g,h)) => List(a*e+b*g, a*f+b*h, c*e+d*g, c*f+d*h)
+        }
+    val A: List[BigInt] = List(1,1,1,0)
+    val I: List[BigInt] = List(1,0,1,0)
+    def pow(x:List[BigInt],n:Int): List[BigInt] = n match{
+        case 0 => I
+        case _ => n%2 match{
+            case 1 => mulMatrix(A, pow(mulMatrix(A,A), (n-1)/2))
+            case 0 => pow(mulMatrix(A,A), n/2)
+        }
+    }
+    val A_n = pow(A,n)
+    A_n(2)
 }
 
 //An implementation of the Fibonacci function using polynomial products
