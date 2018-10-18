@@ -52,7 +52,7 @@ object FIB {
               c;
             }
             case _ =>{
-              (m%2)match{
+              (m%2==0)match{
                 case true =>{
                   pow(mm(a,a), m/2)
                 }
@@ -103,7 +103,7 @@ object FIB {
           }
           def podd(r: Array[BigInt], dr: Int): Array[BigInt] = {
             //整式のうち、奇数次数の係数のみ取り出す
-            (dr%2) match{
+            (dr%2==0) match{
               case true => {
                 var o = new Array[BigInt](dr/2)
                 for(i <- 0 to dr/2-1){
@@ -126,7 +126,7 @@ object FIB {
             for(i <- 0 to dqx){
               t(i) = qx(i);
             }
-            (dqx%2) match{
+            (dqx%2==0) match{
               case true => {
                 for(i <- 0 to dqx/2-1){
                   t(2*i + 1) = -1*qx(2*i + 1);
@@ -141,7 +141,7 @@ object FIB {
               }
             }
           }
-          (m%2) match {
+          (m%2==0) match {
             case true =>{
               porec(m/2, poev(pocon(p, dp, revQ(q, dq), dq), dp+dq), (dp+dq)/2, poev(pocon(q, dq, revQ(q, dq),  dq), dq+dq), dq);
             }
