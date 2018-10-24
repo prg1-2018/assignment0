@@ -22,12 +22,12 @@ def fib_matrix(n: Int): BigInt = {
         case (List(a,b,c,d),List(e,f,g,h)) => List(a*e+b*g, a*f+b*h, c*e+d*g, c*f+d*h)
         }
     val A: List[BigInt] = List(1,1,1,0)
-    val I: List[BigInt] = List(1,0,1,0)
+    val I: List[BigInt] = List(1,0,0,1)
     def pow(x:List[BigInt],n:Int): List[BigInt] = n match{
         case 0 => I
         case _ => n%2 match{
-            case 1 => mulMatrix(A, pow(mulMatrix(A,A), (n-1)/2))
-            case 0 => pow(mulMatrix(A,A), n/2)
+            case 1 => mulMatrix(x, pow(mulMatrix(x,x), (n-1)/2))
+            case 0 => pow(mulMatrix(x,x), n/2)
         }
     }
     val A_n = pow(A,n)
